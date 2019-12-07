@@ -18,7 +18,7 @@ class AuthorIndexView(ListView):
         # Loan.expire_loans()
         return super().get_context_data(**kwargs)
 
-class AuthorView(DetailView):
+class AuthorDetailView(DetailView):
     template_name = 'author/detail.html'
-    pk_url_kwarg = 'article_pk'
+    pk_url_kwarg = 'author_pk'
     model = Author

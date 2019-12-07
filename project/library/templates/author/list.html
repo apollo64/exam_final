@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}
+    Список авторов
+{% endblock %}
+
+{% block heading %}
+    Добро пожаловать
+{% endblock %}
+
+{% block content %}
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +27,7 @@
             <th scope="col">Дата смерти</th>
             <th scope="col">Био</th>
             <th scope="col">Фото</th>
+            <th scope="col">Операции</th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +39,7 @@
                 <td>{{ author.date_of_death|date:'d.m.Y' }}</td>
                 <td>{{ author.biography }}</td>
                 <td>{{ author.image}}</td>
+                <td><a href="{% url 'library:author_detail' author.pk %}" >Детали</a></td>
                 </tr>
         {% empty %}
             <tr>
@@ -39,3 +54,4 @@
     </table>
 </body>
 </html>
+{% endblock %}
