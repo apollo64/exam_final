@@ -12,7 +12,7 @@ class AuthorIndexView(ListView):
     paginate_orphans = 1
     # search_value = None
     model = Author
-    # ordering = ['name']
+    ordering = ['name']
 
     def get_context_data(self, **kwargs):
         # Loan.expire_loans()
