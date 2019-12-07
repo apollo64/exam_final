@@ -32,6 +32,8 @@
         </thead>
         <tbody>
         {% for author in authors %}
+         {% if author.status == False %}
+        {% else %}
             <tr>
                 <td>{{ author.id }}</td>
                 <td>{{ author.name }} </td>
@@ -41,6 +43,7 @@
                 <td>{{ author.image}}</td>
                 <td><a href="{% url 'library:author_detail' author.pk %}" >Детали</a></td>
                 </tr>
+        {% endif%}
         {% empty %}
             <tr>
                 <td colspan="10">

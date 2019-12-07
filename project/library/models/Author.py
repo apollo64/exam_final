@@ -35,6 +35,14 @@ class Author(models.Model):
         default=None
     )
 
+    status = models.BooleanField(
+        verbose_name='Статус',
+        max_length=100,
+        null=False,
+        blank=False,
+        default=True,
+    )
+
     class Meta:
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'

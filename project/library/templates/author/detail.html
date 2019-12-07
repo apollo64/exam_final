@@ -17,7 +17,7 @@
     <p>Автор: {{ author.name }}</p>
 
     <li><a href="#">Редактировать</a></li>
-    <li><a href="#">Удалить</a></li>
+    <li><a href="{% url 'library:author_delete' author.pk %}">Удалить</a></li>
 
 
 <hr/>

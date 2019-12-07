@@ -1,4 +1,6 @@
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView
 from django.shortcuts import render
 
 # Create your views here.
@@ -22,3 +24,18 @@ class AuthorDetailView(DetailView):
     template_name = 'author/detail.html'
     pk_url_kwarg = 'author_pk'
     model = Author
+
+
+
+class AuthorDeleteView(UserPassesTestMixin, DeleteView):
+    model = Author
+    success_url = reverse_lazy('library:index')
+    template_name = 'author/delete.html'
+    pk_url_kwarg = 'author_pk'
+
+
+    def test_func(self):
+        author = Author.objects.get(pk=self.kwargs['author_pk'])
+        return author.id == self.request.user.is_superuser
+
+
