@@ -14,7 +14,9 @@
     <h1>Автор: {{ author.name }}</h1>
 
     <p>Биография: {{ author.biography }}</p>
-    <p>Автор: {{ author.name }}</p>
+    <p>Дата рождения: {{ author.birth_date}}</p>
+    <p>Дата смерти: {{ author.death_date }}</p>
+    <p>Биография: {{ author.biography}}</p>
 
     <li><a href="#">Редактировать</a></li>
     <li><a href="{% url 'library:author_delete' author.pk %}">Удалить</a></li>
