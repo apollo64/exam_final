@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список авторов</title>
+</head>
+<body>
+    <table class="table table-hover mt-4">
+        <thead>
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">ФИО Автора</th>
+            <th scope="col">Дата рождения</th>
+            <th scope="col">Дата смерти</th>
+            <th scope="col">Био</th>
+            <th scope="col">Фото</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for author in authors %}
+            <tr>
+                <td>{{ author.id }}</td>
+                <td>{{ author.name }} </td>
+                <td>{{ author.date_of_birth|date:'d.m.Y' }}</td>
+                <td>{{ author.date_of_death|date:'d.m.Y' }}</td>
+                <td>{{ author.biography }}</td>
+                <td>{{ author.image}}</td>
+                </tr>
+        {% empty %}
+            <tr>
+                <td colspan="10">
+                    <div class="no-content">
+                        <p class="no-content-text">Авторов пока нет</p>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
