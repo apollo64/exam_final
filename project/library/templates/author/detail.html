@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Подробнее</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}View{% endblock %}
+
+{% block menu %}
+
+    <li><a href="{% url 'library:index' %}">На главную</a></li>
+    <li><a href="#">#</a></li>
+
+
+{% endblock %}
+
+{% block content %}
+    <h1>Автор: {{ author.name }}</h1>
+
+    <p>Биография: {{ author.biography }}</p>
+    <p>Автор: {{ author.name }}</p>
+
+    <li><a href="#">Редактировать</a></li>
+    <li><a href="#">Удалить</a></li>
+
+
+<hr/>
