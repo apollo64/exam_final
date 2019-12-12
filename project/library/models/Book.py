@@ -9,7 +9,7 @@ class Book(models.Model):
         blank=False,
     )
     author = models.ForeignKey(
-        'pawnshop.Author',
+        'library.Author',
         related_name='books',
         verbose_name='Автор',
         on_delete=models.CASCADE,

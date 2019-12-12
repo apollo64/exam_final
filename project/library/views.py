@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from library.forms import AuthorForm
 from library.models import Author
 
-class AuthorUpdateView(UpdateView):
+class AuthorUpdateView(UserPassesTestMixin, UpdateView):
     template_name = 'author/update.html'
     model = Author
     pk_url_kwarg = 'author_pk'
@@ -16,6 +16,8 @@ class AuthorUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('library:author_detail', kwargs={'author_pk': self.object.pk})
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class AuthorDetailView(DetailView):
