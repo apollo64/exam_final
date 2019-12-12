@@ -7,11 +7,14 @@ from django.shortcuts import render, redirect
 from library.forms import AuthorForm
 from library.models import Author
 
+
 class AuthorUpdateView(UserPassesTestMixin, UpdateView):
     template_name = 'author/update.html'
     model = Author
     pk_url_kwarg = 'author_pk'
     form_class = AuthorForm
+    context_object_name = 'author'
+
 
     def get_success_url(self):
         return reverse('library:author_detail', kwargs={'author_pk': self.object.pk})
@@ -20,33 +23,11 @@ class AuthorUpdateView(UserPassesTestMixin, UpdateView):
         return self.request.user.is_superuser
 
 
-class AuthorDetailView(DetailView):
-    template_name = 'author/detail.html'
-    pk_url_kwarg = 'author_pk'
-    model = Author
-
-    def form_valid(self, form):
-        data = form.cleaned_data
-        author = Author.objects.create(name=data['name'],
-                                       birth_date=data['birth_date'],
-                                       death_date=data['death_date'],
-                                       biography=data['biography'],
-                                       image=data['image'],
-                                       )
-        self.object = author
-        return redirect(self.get_success_url())
-
-    def get_success_url(self):
-        return reverse('library:author_detail', kwargs={'author_pk': self.object.pk})
-
-
-
-
 class AuthorIndexView(ListView):
     template_name = 'author/list.html'
     context_object_name = 'authors'
-    paginate_by = 10
-    paginate_orphans = 1
+    # paginate_by = 10
+    # paginate_orphans = 1
     model = Author
     ordering = ['name']
 
@@ -58,6 +39,7 @@ class AuthorDetailView(DetailView):
     template_name = 'author/detail.html'
     pk_url_kwarg = 'author_pk'
     model = Author
+    context_object_name = 'author'
 
 
 class AuthorDeleteView(UserPassesTestMixin, DeleteView):
@@ -75,9 +57,10 @@ class AuthorCreateView(UserPassesTestMixin, CreateView):
     template_name = 'author/create.html'
     model = Author
     form_class = AuthorForm
+    context_object_name = 'author'
+
 
     def test_func(self):
-        # Author.objects.get(pk=self.kwargs['author_pk'])
         return self.request.user.is_superuser
 
     def form_valid(self, form):
@@ -88,10 +71,9 @@ class AuthorCreateView(UserPassesTestMixin, CreateView):
                                        biography=data['biography'],
                                        image=data['image'],
                                        )
+        author.save()
         self.object = author
         return redirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('library:author_detail', kwargs={'author_pk': self.object.pk})
-
-
