@@ -8,3 +8,4 @@ media
 *.json
 .pytest_cache
 .cache
+uploads

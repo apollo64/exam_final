@@ -2,13 +2,7 @@
 
 {% block title %}View{% endblock %}
 
-{% block menu %}
 
-    <li><a href="{% url 'library:index' %}">На главную</a></li>
-    <li><a href="#">#</a></li>
-
-
-{% endblock %}
 
 {% block content %}
     <h1>Автор: {{ author.name }}</h1>
@@ -16,9 +10,12 @@
     <p>Биография: {{ author.biography }}</p>
     <p>Дата рождения: {{ author.birth_date}}</p>
     <p>Дата смерти: {{ author.death_date }}</p>
-    <p>Биография: {{ author.biography}}</p>
+    {% if author.image %}
+    <p> check </p>
+       <img class="avatar" src="{{ author.image.url }}" width="250" height="250" alt="author picture">
+    {% endif %}
 
-    <li><a href="#">Редактировать</a></li>
+    <li><a href="{% url 'library:author_update' author.pk %}">Редактировать</a></li>
     <li><a href="{% url 'library:author_delete' author.pk %}">Удалить</a></li>
 
 

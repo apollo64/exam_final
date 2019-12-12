@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Update{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'library:index' %}">Авторы</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1>Update author</h1>
+
+    <form action="{% url 'library:author_update' author.pk %}" method="post">
+         {% include 'partials/_form.html' %}
+    </form>
+{% endblock %}

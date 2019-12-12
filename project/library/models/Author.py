@@ -30,6 +30,7 @@ class Author(models.Model):
 
     image = models.ImageField(
         verbose_name='Фотография',
+        upload_to='author_pics',
         null=True,
         blank=True,
         default=None
