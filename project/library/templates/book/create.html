@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Create author</h1>
+    <h1>Create book</h1>
 
-    <form action="{% url 'library:author_create' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'library:book_create' author.pk %}" method="post" enctype="multipart/form-data">
          {% include 'partials/_form.html' %}
     </form>
 {% endblock %}

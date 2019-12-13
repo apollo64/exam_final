@@ -15,7 +15,6 @@ class Book(models.Model):
         on_delete=models.CASCADE,
         null=False,
         blank=False,
-        default=None
     )
     created_at = models.DateField(
         verbose_name='Год издания',
@@ -26,7 +25,7 @@ class Book(models.Model):
         verbose_name='Текст книги',
         null=True,
         blank=True,
-        upload_to='author_pics',
+        upload_to='book_files',
         default=None
     )
     cover = models.ImageField(

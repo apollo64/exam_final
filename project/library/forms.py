@@ -1,6 +1,6 @@
 from django import forms
 
-from library.models import Author
+from library.models import Author, Book
 
 
 class AuthorForm(forms.ModelForm):
@@ -20,3 +20,20 @@ class AuthorForm(forms.ModelForm):
     def save(self):
         author = super().save()
         return author
+
+
+class BookForm(forms.ModelForm):
+    cover = forms.ImageField(label='Фото', required=False)
+    file = forms.FileField(label='Файл', required=False)
+    created_at = forms.DateField(label='Дата создания',
+                                 input_formats=['%d/%m/%Y'],
+                                 required=True)
+
+
+    class Meta:
+        model = Book
+        exclude = ["author"]
+
+    # def save(self):
+    #     author = super().save()
+    #     return author
