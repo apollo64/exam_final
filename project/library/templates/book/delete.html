@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title_block %}Удалить книгу{% endblock %}
+
+{% block content %}
+<h1>Вы уверены, что хотите удалить книгу &laquo;{{ book.name }}&raquo;?</h1>
+<form action="{% url 'library:book_delete' book.pk %}" method="post">
+    {% csrf_token %}
+    <div class="delete_buttons">
+        <button class="delete_ok" type="submit">Да</button>
+        <a class="delete_cancel" href="{% url 'library:book_detail' book.pk %}">Нет</a>
+    </div>
+</form>
+{% endblock %}

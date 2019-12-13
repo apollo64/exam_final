@@ -49,7 +49,6 @@ class AuthorDeleteView(UserPassesTestMixin, DeleteView):
     pk_url_kwarg = 'author_pk'
 
     def test_func(self):
-        Author.objects.get(pk=self.kwargs['author_pk'])
         return self.request.user.is_superuser
 
 

@@ -17,7 +17,7 @@
 
 
     <li><a href="{% url 'library:book_update' book.pk %}">Редактировать</a></li>
-    <li><a href="#">Удалить</a></li>
+    <li><a href="{% url 'library:book_delete' book.pk %}">Удалить</a></li>
 
 
 <hr/>

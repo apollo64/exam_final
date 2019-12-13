@@ -1,10 +1,26 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect
-from django.urls import reverse
-from django.views.generic import DetailView, CreateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
 from library.forms import BookForm
 from library.models import Book, Author
+
+
+
+class BookUpdateView(UserPassesTestMixin, UpdateView):
+    template_name = 'book/update.html'
+    model = Book
+    pk_url_kwarg = 'book_pk'
+    form_class = BookForm
+    context_object_name = 'book'
+
+
+    def get_success_url(self):
+        return reverse('library:book_detail', kwargs={'book_pk': self.object.pk})
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class BookDetailView(DetailView):
@@ -50,3 +66,14 @@ class BookCreateView(UserPassesTestMixin, CreateView):
 
     def get_success_url(self):
         return reverse('library:book_detail', kwargs={'book_pk': self.object.pk})
+
+
+class BookDeleteView(UserPassesTestMixin, DeleteView):
+    model = Book
+    success_url = reverse_lazy('library:index')  # правильно было бы поставить возврат на автора книги
+    template_name = 'book/delete.html'
+    pk_url_kwarg = 'book_pk'
+
+    def test_func(self):
+        return self.request.user.is_superuser
+

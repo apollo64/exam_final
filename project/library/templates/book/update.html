@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Update{% endblock %}
+
+{% block menu %}
+
+{% endblock %}
+
+{% block content %}
+    <h1>Update book</h1>
+
+    <form action="{% url 'library:book_update' book.pk %}" method="post" enctype="multipart/form-data">
+         {% include 'partials/_form.html' %}
+    </form>
+{% endblock %}
