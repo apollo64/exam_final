@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}
+    Список книг
+{% endblock %}
+
+{% block heading %}
+    Добро пожаловать
+{% endblock %}
+
+{% block content %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг библиотеки</title>
+</head>
+<body>
+    <a href="#" >Добавить книгу</a>
+    <hr>
+    <table class="table table-hover mt-4">
+        <thead>
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Название</th>
+            <th scope="col">ФИО Автора</th>
+            <th scope="col">Дата создания</th>
+            <th scope="col">обложка</th>
+            <th scope="col">Скачать</th>
+            <th scope="col">Подробнее</th>
+        </tr>
+        </thead>
+        <tbody>
+                {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.name }} </td>
+                <td>{{ book.author.name }} </td>
+                <td>{{ book.created_at|date:'d.m.Y' }}</td>
+                <td>
+                {% if book.cover %}
+                <img class="avatar" src="{{ book.cover.url }}" width="250" height="250" alt="author picture">
+                {% else%}
+                    <p> Обложка</p>
+                {% endif %}
+                </td>
+                <td>
+                {% if book.file %}
+                <a href="{{ book.file.url }}" download="{{ book.name }}">Скачать</a>
+                {% else %}
+                 <p>Книга не доступна для скачивания</p>
+                {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'library:book_detail' book.pk %}">Детали</a></li>
+
+                </td>
+                </tr>
+
+        {% empty %}
+            <tr>
+                <td colspan="10">
+                    <div class="no-content">
+                        <p class="no-content-text">Авторов пока нет</p>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock %}

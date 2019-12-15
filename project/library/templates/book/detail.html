@@ -3,22 +3,24 @@
 {% block title %}View{% endblock %}
 
 
-
 {% block content %}
 
-    <h1>Название книги: {{ book.name }}</h1>
+<h1>Название книги: {{ book.name }}</h1>
 
-    <p>Имя автора : {{ book.author.name }}</p>
-    <p>Дата создания: {{ book.created_at | date:" d M Y" }}</p>
-    {% if book.cover %}
-       <img class="avatar" src="{{ book.cover.url }}" width="250" height="250" alt="author picture">
+<p>Имя автора : {{ book.author.name }}</p>
+<p>Дата создания: {{ book.created_at | date:" d M Y" }}</p>
+{% if book.cover %}
+<img class="avatar" src="{{ book.cover.url }}" width="250" height="250" alt="author picture">
+{% endif %}
+
+{% if book.file %}
+<li><a href="{{ book.file.url }}" download="{{ book.name }}">Скачать</a></li>
     {% endif %}
-
 
 
     <li><a href="{% url 'library:book_update' book.pk %}">Редактировать</a></li>
     <li><a href="{% url 'library:book_delete' book.pk %}">Удалить</a></li>
 
 
-<hr/>
-{% endblock %}
+    <hr/>
+    {% endblock %}

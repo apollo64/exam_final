@@ -1,12 +1,23 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 
 from library.forms import BookForm
 from library.models import Book, Author
 
 
+
+class BookIndexView(ListView):
+    template_name = 'book/list.html'
+    context_object_name = 'books'
+    # paginate_by = 10
+    # paginate_orphans = 1
+    model = Book
+    ordering = ['name']
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
 
 class BookUpdateView(UserPassesTestMixin, UpdateView):
     template_name = 'book/update.html'
