@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 from django.shortcuts import redirect, render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
-# from accounts.forms import UserForm
 from accounts.forms import UserForm
+from accounts.models import Account
 
 
 class UserDetailView(DetailView):
@@ -55,3 +55,12 @@ def register_view(request, *args, **kwargs):
 def logout_view(request):
     logout(request)
     return redirect('library:index')
+
+class UserListView(ListView):
+    template_name = 'list.html'
+    context_object_name = 'users'
+    model = Account
+    ordering = ['pk']
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
