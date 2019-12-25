@@ -4,9 +4,7 @@
 
 
 {% block content %}
-<h1>имя пользователя: {{ user.username }}</h1>
-
+<h2>имя: {{ user.username }}</h2>
 <p>mail: {{ user.email }}</p>
-<p>список книг:</p>
-
+{% include "bookshelf/list.html" %}
 {% endblock %}
