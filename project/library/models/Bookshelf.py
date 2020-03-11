@@ -21,5 +21,5 @@ class Bookshelf(models.Model):
         verbose_name_plural = 'Книжные полки'
 
     def __str__(self):
-        return f'Полка пользователя \'{self.user.username} \''
+        return f"Полка пользователя \'{self.user.username} \'"
 

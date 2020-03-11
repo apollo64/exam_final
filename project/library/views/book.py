@@ -88,3 +88,18 @@ class BookDeleteView(UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
+
+
+# def booktobookshelf(book, self.request.user):
+#     user = self.user
+#
+#     if book in
+#     user.bookshelf.book.add(data['book'])
+#     tags = data['tags'].split(',')
+#     db_tags = Tag.objects.all()
+#     for tag in tags:
+#         if tag not in db_tags:
+#             article.tags.add(Tag.objects.create(tag=tag.strip()))
+#         else:
+#             article.tags.add(Tag.objects.filter(tag__iexact=tag.strip()))
+#     return article
